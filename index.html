@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Dashboard</title>
+  <style>
+    /* Reset some styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      background-color: #f4f7fa;
+    }
+
+    /* Sidebar Styling */
+    .sidebar {
+      width: 250px;
+      background-color: #2f3b52;
+      color: #fff;
+      padding-top: 20px;
+      height: 100vh;
+      position: fixed;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      color: #fff;
+      margin-bottom: 30px;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #444;
+    }
+
+    .sidebar ul li:hover {
+      background-color: #1c2530;
+    }
+
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    /* Main Content Area */
+    .main-content {
+      margin-left: 250px;
+      padding: 30px;
+      width: 100%;
+    }
+
+    .header {
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .widget {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .widget h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .widget .stat {
+      font-size: 24px;
+      color: #4caf50;
+    }
+
+    .chart-container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 200px;
+      }
+
+      .main-content {
+        margin-left: 200px;
+      }
+
+      .header h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Analytics</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </div>
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Welcome to Your Dashboard</h1>
+      <div>Logout</div>
+    </div>
+
+    <div class="widget">
+      <h3>Total Users</h3>
+      <div class="stat">1,234</div>
+    </div>
+
+    <div class="widget">
+      <h3>Revenue</h3>
+      <div class="stat">$10,500</div>
+    </div>
+
+    <div class="widget chart-container">
+      <h3>Sales Overview</h3>
+      <canvas id="salesChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Script for Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Data for the Sales Chart
+    const salesData = {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      datasets: [{
+        label: 'Sales in $',
+        data: [3000, 4000, 3500, 5000, 4200, 6000],
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
+        borderWidth: 1
+      }]
+    };
+
+    // Config for the Sales Chart
+    const salesConfig = {
+      type: 'line',
+      data: salesData,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    // Initialize the chart
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, salesConfig);
+  </script>
+</body>
+</html>
